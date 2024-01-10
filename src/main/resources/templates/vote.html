@@ -1,0 +1,33 @@
+<html layout:decorate="~{layout}">
+<div layout:fragment="content" class="container my-3">
+    <div class="card my-3">
+        <div class="card-body">
+            <div class="my-3">
+                <a id="vote" class="recommend btn btn-sm btn-outline-secondary">
+                    추천
+                    <span id="vote_count" class="badge rounded-pill bg-success" th:text="${vote}"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+</html>
+
+
+<script layout:fragment="script" type='text/javascript'>
+    $('#vote').on("click", function () {
+        if (confirm("정말로 추천하시겠습니까?")) {
+            $.ajax({
+                type: "GET",
+                url: '/vote',
+                success: function (data) {
+                    $("#vote_count").text(data)
+                },
+                error: function (err) {
+
+                }
+            })
+        }
+    })
+
+</script>
